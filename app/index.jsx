@@ -16,7 +16,7 @@ export default function Index() {
     <View style={styles.container}>
       {}
       <Image 
-        source={require('../assets/images/Mobile.png')} 
+        source={require('../assets/images/cp.png')} 
         style={styles.image}
       />
       <Text style={styles.text}>Welcome to Smart-Tap</Text>

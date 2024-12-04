@@ -1,17 +1,17 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';  
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function LoginScreen() {
-  const [instructorNumber, setInstructorNumber] = useState(''); 
-  const [email, setEmail] = useState(''); 
-  const [password, setPassword] = useState('');  
-  const [passwordVisible, setPasswordVisible] = useState(false);  
+  const [instructorNumber, setInstructorNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleLogin = () => {
     if (email && password) {
-      router.push("/home"); 
+      router.push("/home");
     } else {
       alert('Please enter both email and password.');
     }
@@ -23,9 +23,15 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Login</Text>
       
-      {}
+      {/* Add Image at the top */}
+      <Image 
+        source={require('../assets/images/cp.png')} // Change this to your image path
+        style={styles.logo} 
+      />
+      
+      <Text style={styles.heading}>Sign In</Text>
+      
       <View style={styles.inputBox}>
         <Text style={styles.label}>Instructor Number</Text>
         <TextInput
@@ -37,7 +43,6 @@ export default function LoginScreen() {
         />
       </View>
 
-      {}
       <View style={styles.inputBox}>
         <Text style={styles.label}>Email</Text>
         <TextInput
@@ -50,7 +55,6 @@ export default function LoginScreen() {
         />
       </View>
 
-      {}
       <View style={styles.inputBox}>
         <Text style={styles.label}>Password</Text>
         <View style={styles.passwordInputContainer}>
@@ -71,18 +75,16 @@ export default function LoginScreen() {
           </TouchableOpacity>
         </View>
       </View>
-      
-      {}
+
       <TouchableOpacity style={styles.btn} onPress={handleLogin}>
         <Text style={styles.btnText}>Login</Text>
       </TouchableOpacity>
 
-      {}
       <TouchableOpacity onPress={() => router.push("/signup")}>
-  <Text style={styles.toggleText}>
-    Don't have an account? <Text style={styles.registerText}>Register here.</Text>
-  </Text>
-</TouchableOpacity>
+        <Text style={styles.toggleText}>
+          Don't have an account? <Text style={styles.registerText}>Register here.</Text>
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -92,13 +94,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#09292C',
+    backgroundColor: 'white',
     paddingHorizontal: 30,
+  },
+  logo: {
+    width: 120,  
+    height: 120, 
+    marginBottom: 30,  
+    resizeMode: 'contain', 
   },
   heading: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#111',
     marginBottom: 30,
   },
   inputBox: {
@@ -108,21 +116,20 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#fff',
+    color: '#111',
     marginBottom: 8,
   },
   registerText: {
-    color: '#1C7E94', 
+    color: 'blue', 
     fontSize: 14,
   },
-
   input: {
     width: '100%',
     padding: 10,
     backgroundColor: '#fff',
     borderRadius: 15,
     borderWidth: 2,
-    borderColor: '#1C7E94',
+    borderColor: '#99B998',
     fontSize: 16,
     color: '#333',
   },
@@ -139,18 +146,18 @@ const styles = StyleSheet.create({
   btn: {
     width: '100%',
     padding: 10,
-    backgroundColor: '#1C7E94',
+    backgroundColor: '#99B998',
     borderRadius: 15,
     alignItems: 'center',
     marginTop: 10,
   },
   btnText: {
     fontSize: 18,
-    color: '#fff',
+    color: '#333',
   },
   toggleText: {
     marginTop: 30,
-    color: '#fff',
+    color: '#333',
     fontSize: 14,
     textDecorationLine: 'none',
     marginVertical: 30,

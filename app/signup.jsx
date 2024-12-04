@@ -1,7 +1,7 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; 
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function RegisterScreen() {
   const [email, setEmail] = useState('');
@@ -10,7 +10,6 @@ export default function RegisterScreen() {
   const [passwordVisible, setPasswordVisible] = useState(false); 
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false); 
 
-  
   const handleRegister = () => {
     if (password === confirmPassword) {
       alert('Registration Successful!');
@@ -20,18 +19,23 @@ export default function RegisterScreen() {
     }
   };
 
-  
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  
   const toggleConfirmPasswordVisibility = () => {
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };
 
   return (
     <View style={styles.container}>
+      
+      {/* Add Image at the top */}
+      <Image 
+        source={require('../assets/images/cp.png')} // Change this to your image path
+        style={styles.logo} 
+      />
+
       <Text style={styles.heading}>Register</Text>
 
       <View style={styles.inputBox}>
@@ -117,13 +121,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#09292C',
+    backgroundColor: 'white',
     paddingHorizontal: 30,
+  },
+  logo: {
+    width: 120, 
+    height: 120, 
+    marginBottom: 30,  
+    resizeMode: 'contain', 
   },
   heading: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#111',
     marginBottom: 40,
   },
   inputBox: {
@@ -133,7 +143,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#fff',
+    color: '#111',
     marginBottom: 8,
   },
   input: {
@@ -142,12 +152,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 15,
     borderWidth: 2,
-    borderColor: '#1C7E94',
+    borderColor: '#99B998',
     fontSize: 16,
     color: '#333',
   },
   registerText: {
-    color: '#1C7E94', 
+    color: 'blue', 
     fontSize: 14,
   },
 
@@ -164,18 +174,18 @@ const styles = StyleSheet.create({
   btn: {
     width: '100%',
     padding: 10,
-    backgroundColor: '#1C7E94',
+    backgroundColor: '#99B998',
     borderRadius: 15,
     alignItems: 'center',
     marginTop: 10,
   },
   btnText: {
     fontSize: 18,
-    color: '#fff',
+    color: '#111',
   },
   toggleText: {
     marginTop: 30,
-    color: '#fff',
+    color: '#111',
     fontSize: 14,
     textDecorationLine: 'none',
     marginVertical: 30,

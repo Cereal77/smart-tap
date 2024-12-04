@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View, ScrollView, Switch, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; 
 import { FontAwesome } from 'react-native-vector-icons';  
 import About from './about'; 
@@ -8,9 +8,34 @@ import SignIn from './signin';
 const Tab = createBottomTabNavigator();
 
 function HomeScreen() {
+  const [isSwitchOn, setIsSwitchOn] = useState(false); 
+
+  const toggleSwitch = () => setIsSwitchOn(previousState => !previousState);
+
+  const handleButtonPress = () => {
+    alert('Button Pressed!');
+  };
+
   return (
     <View style={styles.container}>
+      {}
+      <Image
+         source={require('../assets/images/cp.png')} 
+        style={styles.image}
+      />
+
       <Text style={styles.heading}>ATTENDANCE</Text>
+
+      {}
+      <View style={styles.switchContainer}>
+        <Text>{isSwitchOn ? '' : ''}</Text>
+        <Switch
+          onValueChange={toggleSwitch}
+          value={isSwitchOn}
+          trackColor={{ false: '#767577', true: '#99B998' }}
+          thumbColor={isSwitchOn ? '#f5dd4b' : '#f4f3f4'}
+        />
+      </View>
 
       <ScrollView style={styles.table}>
         <View style={styles.tableRow}>
@@ -22,40 +47,49 @@ function HomeScreen() {
         <View style={styles.tableRow}>
           <Text style={styles.tableCell}>12345</Text>
           <Text style={styles.tableCell}>john.doe@example.com</Text>
-          <Text style={styles.tableCell}>Active</Text>
+          <Text style={styles.tableCell}>Active</Text> {}
         </View>
         
         <View style={styles.tableRow}>
-          <Text style={styles.tableCell}>12345</Text>
-          <Text style={styles.tableCell}>john.doe@example.com</Text>
-          <Text style={styles.tableCell}>Active</Text>
+          <Text style={styles.tableCell}>12346</Text>
+          <Text style={styles.tableCell}>jane.doe@example.com</Text>
+          <Text style={styles.tableCell}>Active</Text> {}
         </View>
+
         <View style={styles.tableRow}>
           <Text style={styles.tableCell}>12345</Text>
           <Text style={styles.tableCell}>john.doe@example.com</Text>
-          <Text style={styles.tableCell}>Active</Text>
+          <Text style={styles.tableCell}>Active</Text> {}
         </View>
+        
+        <View style={styles.tableRow}>
+          <Text style={styles.tableCell}>12346</Text>
+          <Text style={styles.tableCell}>jane.doe@example.com</Text>
+          <Text style={styles.tableCell}>Active</Text> {}
+        </View>
+
         <View style={styles.tableRow}>
           <Text style={styles.tableCell}>12345</Text>
           <Text style={styles.tableCell}>john.doe@example.com</Text>
-          <Text style={styles.tableCell}>Active</Text>
+          <Text style={styles.tableCell}>Active</Text> {}
         </View>
+        
         <View style={styles.tableRow}>
-          <Text style={styles.tableCell}>12345</Text>
-          <Text style={styles.tableCell}>john.doe@example.com</Text>
-          <Text style={styles.tableCell}>Active</Text>
+          <Text style={styles.tableCell}>12346</Text>
+          <Text style={styles.tableCell}>jane.doe@example.com</Text>
+          <Text style={styles.tableCell}>Active</Text> {}
         </View>
-        <View style={styles.tableRow}>
-          <Text style={styles.tableCell}>12345</Text>
-          <Text style={styles.tableCell}>john.doe@example.com</Text>
-          <Text style={styles.tableCell}>Active</Text>
-        </View>
-        <View style={styles.tableRow}>
-          <Text style={styles.tableCell}>12345</Text>
-          <Text style={styles.tableCell}>john.doe@example.com</Text>
-          <Text style={styles.tableCell}>Active</Text>
-        </View>
+
+        {}
       </ScrollView>
+
+      {}
+      <TouchableOpacity 
+        style={styles.button} 
+        onPress={handleButtonPress}
+      >
+        <Text style={styles.buttonText}>Send to Google Sheet</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -82,7 +116,7 @@ function MyTabs() {
           borderTopWidth: 0, 
         },
         tabBarActiveTintColor: 'green', 
-        tabBarInactiveTintColor: '#333', 
+        tabBarInactiveTintColor: '#99B998', 
       })}
     >
       <Tab.Screen 
@@ -107,7 +141,6 @@ function MyTabs() {
   );
 }
 
-
 export default function Home() {
   return (
     <View style={{ flex: 1 }}>
@@ -119,16 +152,26 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start', 
     alignItems: 'center',
     backgroundColor: '#f5f5f5',
     padding: 20,
+  },
+  image: {
+    width: 100, 
+    height: 100, 
+    marginBottom: 20, 
   },
   heading: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
     marginTop: -10,
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
   },
   table: {
     width: '100%',
@@ -157,5 +200,19 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
     paddingHorizontal: 5,
+  },
+  button: {
+    marginTop: 20, 
+    backgroundColor: '#99B998', 
+    paddingVertical: 12,
+    paddingHorizontal: 40, 
+    borderRadius: 10, 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+  },
+  buttonText: {
+    color: '#333', 
+    fontSize: 16, 
+    fontWeight: 'bold', 
   },
 });
