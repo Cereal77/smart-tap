@@ -11,22 +11,25 @@ export default function LoginScreen() {
 
   const handleLogin = () => {
     if (email && password) {
-      router.push("/home");
+      if (email.endsWith('@gmail.com')) {
+        router.push("/home");
+        console.log('Valid email:', email);
+      } else {
+        alert('Please enter a valid Gmail address.');
+      }
     } else {
       alert('Please enter both email and password.');
     }
   };
-
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-
   return (
     <View style={styles.container}>
       
-      {/* Add Image at the top */}
+      {}
       <Image 
-        source={require('../assets/images/cp.png')} // Change this to your image path
+        source={require('../assets/images/cp.png')} 
         style={styles.logo} 
       />
       
@@ -35,19 +38,23 @@ export default function LoginScreen() {
       <View style={styles.inputBox}>
         <Text style={styles.label}>Instructor Number</Text>
         <TextInput
-          style={styles.input}
-          placeholder="Enter your instructor number"
-          placeholderTextColor="#999"
-          value={instructorNumber}  
-          onChangeText={(text) => setInstructorNumber(text)} 
-        />
+            style={styles.input}
+            placeholder="xx-xxxx"
+            placeholderTextColor="#999"
+            keyboardType="number-pad"
+            value={instructorNumber}
+            onChangeText={(text) => {
+            const filteredText = text.replace(/[^0-9-]/g, '');
+            setInstructorNumber(filteredText);
+           }}
+         />
       </View>
 
       <View style={styles.inputBox}>
         <Text style={styles.label}>Email</Text>
         <TextInput
           style={styles.input}
-          placeholder="Enter your email"
+          placeholder="example@gmail.com"
           placeholderTextColor="#999"
           keyboardType="email-address"
           value={email}  
@@ -60,7 +67,7 @@ export default function LoginScreen() {
         <View style={styles.passwordInputContainer}>
           <TextInput
             style={styles.input}
-            placeholder="Enter your password"
+            placeholder="*******"
             placeholderTextColor="#999"
             secureTextEntry={!passwordVisible}  
             value={password} 

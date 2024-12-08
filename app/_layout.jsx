@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { Stack } from 'expo-router'
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { Stack } from 'expo-router';
+import { DarkModeProvider } from './DarkModeContext'; // Import the context provider
 
 export default function RootLayout() {
   return (
-    <Stack>
+    <DarkModeProvider>  {/* Wrap the Stack with DarkModeProvider */}
+      <Stack>
         <Stack.Screen 
             name='index' 
             options={{headerShown: false}}
@@ -25,9 +27,9 @@ export default function RootLayout() {
             name='home' 
             options={{headerShown: false}}
         />
-        
-    </Stack>
-  )
+      </Stack>
+    </DarkModeProvider>
+  );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

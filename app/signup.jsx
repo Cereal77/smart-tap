@@ -5,24 +5,27 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function RegisterScreen() {
   const [email, setEmail] = useState('');
+  const [instructorNumber, setInstructorNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false); 
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false); 
 
   const handleRegister = () => {
-    if (password === confirmPassword) {
-      alert('Registration Successful!');
-      router.push('signin');
+    if (email && password) {
+      if (email.endsWith('@gmail.com')) {
+        router.push("/signin");
+        console.log('Valid email:', email);
+      } else {
+        alert('Please enter a valid Gmail address.');
+      }
     } else {
-      alert("Passwords do not match! Please try again.");
+      alert('Please enter both email and password.');
     }
   };
-
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-
   const toggleConfirmPasswordVisibility = () => {
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };
@@ -39,21 +42,25 @@ export default function RegisterScreen() {
       <Text style={styles.heading}>Register</Text>
 
       <View style={styles.inputBox}>
-        <Text style={styles.label}>Instructor Number</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your number"
-          placeholderTextColor="#999"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-        />
-      </View>
+  <Text style={styles.label}>Instructor Number</Text>
+  <TextInput
+    style={styles.input}
+    placeholder="xx-xxxx"
+    placeholderTextColor="#999"
+    keyboardType="number-pad"
+    value={instructorNumber}
+    onChangeText={(text) => {
+      const filteredText = text.replace(/[^0-9-]/g, '');
+      setInstructorNumber(filteredText);
+    }}
+  />
+</View>
 
       <View style={styles.inputBox}>
         <Text style={styles.label}>Email</Text>
         <TextInput
           style={styles.input}
-          placeholder="Enter your email"
+          placeholder="example@gmail.com"
           placeholderTextColor="#999"
           keyboardType="email-address"
           value={email}
@@ -66,7 +73,7 @@ export default function RegisterScreen() {
         <View style={styles.passwordInputContainer}>
           <TextInput
             style={styles.input}
-            placeholder="Enter your password"
+            placeholder="*******"
             placeholderTextColor="#999"
             secureTextEntry={!passwordVisible} 
             value={password}
@@ -87,7 +94,7 @@ export default function RegisterScreen() {
         <View style={styles.passwordInputContainer}>
           <TextInput
             style={styles.input}
-            placeholder="Confirm your password"
+            placeholder="*******"
             placeholderTextColor="#999"
             secureTextEntry={!confirmPasswordVisible}
             value={confirmPassword}
